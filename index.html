@@ -1,80 +1,73 @@
-<HTML>
-// Add Script to Head
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <script src="https://swalekh.reverieinc.com/developers/swal-main.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swalekh Integration</title>
+    <script src="https://your-cdn-url/swalekh.js"></script> <!-- Include Swalekh script -->
 </head>
 <body>
-<h2>HTML Forms</h2>
-
-<form action="/action_page.php">
-  <label for="fname">First name:</label><br>
-  <input type="text" id="fname" name="fname" value="John"><br>
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname" value="Doe"><br><br>
-  <input type="submit" value="Submit">
-</form> 
-<script>
-//Declare LoadSwalekh Function
-const validationKey = "6adef7d2-b291-4dfb-af95-d86358e382c3"; // Replace with your actual validation key; 
-const loadSwalekh = async () => {  //Call Load Function
-    await window.initSwalekh({
-        validationKey,
-        optional: {
-            theme: "reverie-red", // Specify the theme you want to use
-        },
-    });
-    
-    await window.loadSwalekh({
-        querySel: '#swalekh-textarea3', // Selector for your textarea
-        lang: 'hi', // Language for transliteration (e.g., Hindi)
-        mode: 'phonetic', // Input mode (e.g., phonetic)
-        langToggle: true, // Enable language toggle
-        modeToggle: true, // Enable mode toggle
-    });
-};
-
-//Unload Swalekh
-window.onload = () => {
-    loadSwalekh();
-};
-
-//Toggle Language
-<select id="langSelect">
-    <option value="hi">Hindi</option>
-    <option value="en">English</option>
-    <option value="as">Assamese</option>
-    <option value="bn">Bengali</option>
-    <option value="gu">Gujarati</option>
-    <option value="kn">Kannada</option>
-    <option value="ml">Malayalam</option>
-    <option value="mr">Marathi</option>
-    <option value="or">Odia</option>
-</select>
-
-<script>
-    window.addEventListener('load', function () {
-        document.querySelector('#langSelect').addEventListener('change', function (e) {
-            lang = e.target.value;
+    <h1>Swalekh Integration Example</h1>
+    <div class="toolbar">
+        <label>
+            Select Language
+            <select id="langSelect">
+                <option value="hi">Hindi</option>
+                <option value="en">English</option>
+                <option value="as">Assamese</option>
+                <option value="bn">Bengali</option>
+                <option value="gu">Gujarati</option>
+                <option value="kn">Kannada</option>
+                <option value="ml">Malayalam</option>
+                <option value="mr">Marathi</option>
+                <option value="or">Odia</option>
+                <option value="pa">Punjabi</option>
+                <option value="ta">Tamil</option>
+                <option value="te">Telugu</option>
+                <option value="ur">Urdu</option>
+            </select>
+        </label>
+        <label>
+            Keyboard
+            <input type="checkbox" id="keyboardCheckbox" />
+        </label>
+    <textarea id="swalekh-textarea3" rows="5" placeholder="Type here..."></textarea>
+ 
+    <script>
+        const validationKey = "6adef7d2-b291-4dfb-af95-d86358e382c3"; // Replace with your actual validation key
+ 
+        const loadSwalekh = async () => {
+            await window.initSwalekh({
+                validationKey,
+                creds:{
+                    querySel: '#swalekh-textarea3',
+                    lang: 'hi',
+                    mode: 'phonetic',
+                    langToggle: true,
+                    modeToggle: true,
+                },
+                optional: {
+                    theme: "reverie-red"
+                }
+            });
+        };
+ 
+        window.addEventListener('load', function () {
             loadSwalekh();
+            window.addEventListener('load', function () {
+                    document.querySelector('#langSelect').addEventListener('change', function (e) {
+                    lang = e.target.value;
+                    loadSwalekh();
+                });
+            window.addEventListener('load', function () {
+            document.querySelector('#keyboardCheckbox').addEventListener('change', function (e) {
+                keyboardEnabled = e.target.checked;
+                window.trigger_mode_change(keyboardEnabled ? "keyboard" : "phonetic");
+            });
         });
-    });
-</script>
-
-//Toggle Mode
-
-<label>
-    Keyboard
-    <input type="checkbox" id="keyboardCheckbox" />
-</label>
-
-<script>
-    window.addEventListener('load', function () {
-        document.querySelector('#keyboardCheckbox').addEventListener('change', function (e) {
-            keyboardEnabled = e.target.checked;
-            window.trigger_mode_change(keyboardEnabled ? "keyboard" : "phonetic");
         });
-    });
-</script>
-</script>
+ 
+        });
+    </script>
 </body>
-</HTML>
+</html>
