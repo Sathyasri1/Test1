@@ -4,7 +4,17 @@
     <script src="https://swalekh.reverieinc.com/developers/swal-main.js"></script>
 </head>
 <body>
-    <script>
+<h2>HTML Forms</h2>
+
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <input type="submit" value="Submit">
+</form> 
+
+<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
 //Declare LoadSwalekh Function
 const validationKey = "6adef7d2-b291-4dfb-af95-d86358e382c3"; // Replace with your actual validation key; 
 const loadSwalekh = async () => {  //Call Load Function
