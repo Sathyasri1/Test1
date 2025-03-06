@@ -35,13 +35,13 @@
  
     <script>
         const validationKey = "7d8b545c-3ae6-4d3d-b6d6-0ce6ac16c0b8"; // Replace with your actual validation key
-//const lang = 'hi' 
+
         const loadSwalekh = async () => {
             await window.initSwalekh({
                 validationKey,
                 creds:{
                     querySel: '#swalekh-textarea3',
-                    lang: 'bn',
+                    lang: window.lang,
                     mode: 'phonetic',
                     langToggle: true,
                     modeToggle: true,
@@ -56,7 +56,7 @@
             loadSwalekh();
             window.addEventListener('load', function () {
                     document.querySelector('#langSelect').addEventListener('change', function (e) {
-                    lang = e.target.value;
+                    window.lang = e.target.value;
                     loadSwalekh();
                 });
             window.addEventListener('load', function () {
